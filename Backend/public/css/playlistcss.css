@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #141414;
+}
+
+.playlist-container {
+  width: 80%;
+  margin: auto;
+  padding-top: 50px;
+  color: white;
+}
+
+.playlist-container h1 {
+  font-size: 3em;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px gray;
+}
+
+/* Scrollable div for playlist */
+.playlist-scrollable {
+  max-height: 400px;  /* Set the max height for scrollable area */
+  overflow-y: auto;
+  padding-right: 10px; /* Add some padding to avoid hiding content behind the scrollbar */
+  margin-bottom: 20px; /* Ensure space between playlist and Back button */
+}
+
+.playlist-list {
+  list-style: none;
+}
+
+.song-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #222222;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease-out;
+}
+
+.song-item:hover {
+  transform: scale(1.04);
+}
+
+.song-title {
+  width: 70%;
+}
+
+.song-title p {
+  font-size: 1.2em;
+  color: white;
+  word-wrap: break-word;
+}
+
+.song-play-button {
+  width: 25%;
+}
+
+.song-play-button audio {
+  width: 100%;
+}
+
+.empty-message {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 30px;
+  background-color: #ff6b6b;
+  color: black;
+  border-radius: 8px;
+}
+
+/* Back to Converter button stays outside the scrollable area */
+.back-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.back-button {
+  padding: 12px 20px;
+  font-size: 1.2em;
+  background-color: red;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px gray;
+  transition: background-color 0.3s ease-out;
+}
+
+.back-button:hover {
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+  transform: scale(1.1);
+}
+
+/* Scrollbar styling */
+.playlist-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.playlist-scrollable::-webkit-scrollbar-thumb {
+  background-color: #ff6b6b;
+  border-radius: 5px;
+}
+
+.playlist-scrollable::-webkit-scrollbar-track {
+  background-color: #141414;
+}
+
+/* Responsive styling */
+@media(max-width: 768px) {
+  .playlist-container {
+    width: 90%;
+  }
+
+  .song-title p {
+    font-size: 1em;
+  }
+
+  .song-play-button {
+    width: 35%;
+  }
+}
+
+@media(max-width: 480px) {
+  .playlist-container {
+    width: 100%;
+  }
+
+  .song-title p {
+    font-size: 0.9em;
+  }
+
+  .song-play-button {
+    width: 40%;
+  }
+}
+    

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Playlist</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/playlistcss.css" />
+  </head>
+  <body>
+    <div class="playlist-container">
+      <h1>Your Playlist</h1>
+
+      <!-- Scrollable div for playlist songs -->
+      <div class="playlist-scrollable">
+        <% if (playlist.length > 0) { %>
+        <ul class="playlist-list">
+          <% playlist.forEach(function(song) { %>
+          <li class="song-item flex">
+            <div class="song-title">
+              <p><%= song.title %></p>
+            </div>
+            <div class="song-play-button">
+              <audio controls>
+                <source src="<%= song.link %>" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          </li>
+          <% }); %>
+        </ul>
+        <% } else { %>
+        <p class="empty-message">Your playlist is empty. Convert some songs first!</p>
+        <% } %>
+      </div>
+
+      <!-- Link back to the Converter page -->
+      <div class="back-link">
+        <a href="/">
+          <button class="back-button">Back to Converter</button>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

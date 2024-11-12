@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youtube-Mp3 Converter</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="top-container">
+      <!-- MP3 Conversion Form -->
+      <form action="/convert-mp3" method="POST" id="form">
+        <h1>
+          <i class="fab fa-youtube" aria-hidden="true"></i> Youtube-MP3
+          Converter
+        </h1>
+        <h4>Enter the video ID</h4>
+        <div>
+          <input type="text" name="videoID" placeholder="Video ID" />
+          <button id="convert-btn">Convert</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="bottom-container">
+      <!-- Success/Error Messages for Conversion -->
+      <% if (typeof success != "undefined" && success) { %>
+        <div class="success">
+          <p><%= song_title %></p>
+          <% if (song_link) { %>
+            <!-- If song_link exists, show the download button -->
+            <a href="<%= song_link %>">
+              <button id="download-btn">DOWNLOAD</button>
+            </a>
+              <!-- Track the download in the backend using AJAX -->
+          <button id="downloaded-btn">I have downloaded this song</button>
+
+          <!-- Form to add the song to the playlist -->
+          <form action="/add-to-playlist" method="POST">
+            <button type="submit" id="add-to-playlist-btn" disabled>Add to Playlist</button>
+          </form>
+          <% } else { %>
+            <!-- If song_link is null, display message -->
+            <p>Conversion is required. Please convert the song to MP3 before downloading.</p>
+          <% } %>
+        </div>
+      <% } else if (typeof success != "undefined" && !success) { %>
+        <div class="errors">
+          <p><%= message %></p>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- Link to the Playlist Page -->
+    <div class="playlist-link">
+      <a href="/playlist">
+        <button id="download-btn1">View My Playlist</button>
+      </a>
+    </div>
+
+    <script>
+      // JavaScript to handle the "I have downloaded this song" button click
+      document.getElementById('downloaded-btn').addEventListener('click', async function () {
+        try {
+          const response = await fetch('/downloaded-ajax', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            // If the download status is updated, enable the "Add to Playlist" button
+            document.getElementById('add-to-playlist-btn').disabled = false;
+          } else {
+            alert(result.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      });
+    </script>
+
+  </body>
+</html>
